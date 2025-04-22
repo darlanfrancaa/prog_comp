@@ -1,2 +1,5 @@
 .vscode/
 output/
+*.o
+*.out
+*.exe
