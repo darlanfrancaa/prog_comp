@@ -20,4 +20,3 @@ int main() {
     }
     cout << soma_maxima << endl;
     return 0;
-}
