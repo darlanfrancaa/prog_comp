@@ -32,7 +32,7 @@ int main() {
             }
         } else break;
     }
-    cout << contador_estrelas << " " << soma - contador;
+    cout << contador_estrelas << " " << soma - contador << endl;
 
     return 0;
 }
