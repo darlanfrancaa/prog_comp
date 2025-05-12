@@ -7,18 +7,11 @@ using pii = pair<double,double>;
 
 // link do problema : https://codeforces.com/contest/782/problem/B
 
-// eu moralmente quero o ponto x do plano que satisfaz max ( |x - xi|/vi) ser minimo possivel dentre todas as possibilidades de x,
 /*
-    entao peguemos um cara t 
+    entao peguemos um tempo t
     isso quer dizer que | x - xi | <= vi . t 
-    o que implica qie - vi t <= x - xi <= vi t 
+    o que implica que - vi t <= x - xi <= vi t 
     ou seja xi - vi t  <= x <= vi t + xi 
-
-    5 <=  x <= 9
-    - 3 <= x  <=  5
-    1 <= x <= 5
-
-
 */
 
 int n; 
