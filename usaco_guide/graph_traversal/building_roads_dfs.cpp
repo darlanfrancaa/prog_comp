@@ -6,11 +6,25 @@ const int MOD = 1e9 + 7;
 int n, m; 
 vector<vector<int>> adj;
 vector<bool> visited;
+queue<int> q;
 
-void dfs(int s){
-    if(visited[s]) return; 
-    visited[s] = true;
-    for(auto v: adj[s]) dfs(v);
+// void dfs(int s){
+//     if(visited[s]) return; 
+//     visited[s] = true;
+//     for(auto v: adj[s]) dfs(v);
+// }
+
+void bfs(int s){
+    visited[s] = true; 
+    q.push(s);
+    while(!q.empty()){ 
+        int v = q.front(); q.pop();
+        for(auto u: adj[v]) {
+            if(visited[u]) continue;
+            visited[u] = true;
+            q.push(u);
+        }
+    }
 }
 
 int main() {
@@ -27,7 +41,7 @@ int main() {
     for(int i=0;i<n;i++){
         if(visited[i]) continue;
         componentes.push_back(i);
-        dfs(i);
+        bfs(i);
     }
     cout << componentes.size() - 1 << endl;
     for(int i=0; i < componentes.size()- 1 ; i++){
