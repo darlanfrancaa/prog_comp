@@ -9,7 +9,12 @@ vector<int> down1;
 vector<int> down2;
 vector<int> caminho1;
 vector<int> cima;
-
+/*o adj é a arvore
+o down1 é uma dp que armazena para cada vertice a maior distancia para baixo 
+o down2 é outra dp que armazena para cada vertice a segunda maior distancia para baixo
+o caminho armazena o vertice que a maior distancia para baixo comecou 
+e o cima é uma dp que armazena a maior distancia para cima, ou seja que nao pega a subarvore de um vertice i
+*/
 //primeiro faremos uma dfs para calcular os maiores caminhos para baixo(ou seja down1,down2), enraizando a raiz num vertice fixo.
 void dfs_down(int node, int pai){
     for(int v: adj[node]){
