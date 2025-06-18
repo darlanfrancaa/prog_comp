@@ -3,3 +3,4 @@ output/
 *.o
 *.out
 *.exe
+test
