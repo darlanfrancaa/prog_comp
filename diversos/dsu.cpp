@@ -6,28 +6,39 @@ const int MOD = 1e9 + 7;
 
 struct DSU{
     vector<int> parent; 
+    vector<int> sz;
 
     DSU(int n){ 
         parent.resize(n);
+        sz.resize(n);
         for(int i=0;i<n;i++){
             parent[i]=i;
         }
+        sz.assign(n,1);
     }
 
     int find(int i){
         if(parent[i]==i){
             return i;
         }
-        return find(parent[i]);
+        return parent[i] = find(parent[i]);
     }
     
-    void unit(int i,int j){
+    bool unit(int i,int j){
         int raiz_i = find(i);
         int raiz_j = find(j);
+        if (raiz_i == raiz_j) return false;
         if(raiz_i != raiz_j){
-            parent[raiz_i] = raiz_j;
+            if(sz[raiz_i] <  sz[raiz_j]){
+                swap(raiz_i, raiz_j);
+            }
+            parent[raiz_j] = raiz_i;
+            sz[raiz_i]+= sz[raiz_j];
         }
+        return true;
     }
+
+    bool connected(int x, int y) {return find(x) == find(y);}
 };
 
 int main() {
