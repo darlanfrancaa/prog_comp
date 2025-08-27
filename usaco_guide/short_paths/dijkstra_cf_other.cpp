@@ -14,7 +14,7 @@ int main() {
     vector<int> parent(n,-1);
     for(int i=0;i<m;i++){
         int a, b;
-        ll w; cin >> a >> b >> w; 
+        ll w; cin >> a >> b >> w;   
         a--;b--; 
         vizinhos[a].push_back({b,w});
         vizinhos[b].push_back({a,w});
