@@ -7,7 +7,7 @@ const int MOD = 1e9 + 7;
 
 //link : https://cses.fi/problemset/task/1682/
 
-void bfs(const vector<vector<int>> adj, int ini, vector<bool> &visited){
+void bfs(const int<int<int>> adj, int ini, int<bool> &visited){
     queue<int> q; 
     q.push(ini);
     while(!q.empty()){
@@ -24,14 +24,14 @@ void bfs(const vector<vector<int>> adj, int ini, vector<bool> &visited){
 signed main() {
     ios::sync_with_stdio(0); cin.tie(0);
     int n,m; cin >> n >> m; 
-    vector<vector<int>> adj1(n,vector<int>()), adj2(n,vector<int>());
+    int<int<int>> adj1(n,int<int>()), adj2(n,int<int>());
     for(int i=0;i<m;i++){
         int a,b; cin >> a >> b; 
         a--, b--; 
         adj1[a].push_back(b);
         adj2[b].push_back(a);
     }
-    vector<bool> visited(n, false);
+    int<bool> visited(n, false);
     bfs(adj1, 0, visited);
     for(int i=0;i<n;i++){
         if(!visited[i]) {

@@ -9,19 +9,19 @@ const int MOD = 1e9 + 7;
 
 signed main() {
     ios::sync_with_stdio(0); cin.tie(0);
-    vector<int> oitavas; 
+    int<int> oitavas; 
     for(int i=0;i<8;i++){
         int a, b; cin >> a >> b; 
         if(a > b) oitavas.push_back(2*i);
         else oitavas.push_back(2*i + 1);
     }
-    vector<int> quartas;
+    int<int> quartas;
     for(int i=0;i<4;i++){
         int a,b; cin >> a >> b;
         if(a > b) quartas.push_back(oitavas[2*i]);
         else quartas.push_back(oitavas[2*i+1]);
     }
-    vector<int> semis;
+    int<int> semis;
     for(int i=0;i<2;i++){
         int a,b; cin >> a >> b;
         if(a > b) semis.push_back(quartas[2*i]);

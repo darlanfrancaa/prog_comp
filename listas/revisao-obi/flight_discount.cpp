@@ -20,14 +20,14 @@ struct T {
 signed main() {
     ios::sync_with_stdio(0); cin.tie(0);
     int n, m; cin >> n >> m; 
-    vector<vector<pii>> adj(n+1,vector<pii>());
+    int<int<pii>> adj(n+1,int<pii>());
     for(int i=0;i<m;i++){
         int a, b, w; cin >> a >> b >> w;
         adj[a].push_back({b,w});
     }
 
-    vector<int> dist_using(n+1,LLONG_MAX);
-    vector<int> dist_n_using(n+1,LLONG_MAX);
+    int<int> dist_using(n+1,LLONG_MAX);
+    int<int> dist_n_using(n+1,LLONG_MAX);
     int start = 1;
     priority_queue<T> pq; 
     pq.push({0,start,0});

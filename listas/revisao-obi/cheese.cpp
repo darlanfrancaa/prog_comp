@@ -14,7 +14,7 @@ bool compare(pii &a, pii &b){
 signed main() {
     ios::sync_with_stdio(0); cin.tie(0);
     int n, w; cin >> n >> w; 
-    vector<pii> v(n);
+    int<pii> v(n);
     for(auto &a: v) cin >> a.first >> a.second;
     sort(v.begin(), v.end(), compare);
     int soma = 0; 

@@ -18,7 +18,7 @@ signed main() {
         return 0;
     }
     if (n% 2 == 1){
-        vector<int> v(n+1);
+        int<int> v(n+1);
         int m = (n+1)/2; 
         v[m] = n;
         int left = m-1, right = m+1;
@@ -34,7 +34,7 @@ signed main() {
     } else if( n%2 == 0){
         int m = n/2;
         int i = 1;
-        vector<int> v(n+1);
+        int<int> v(n+1);
         while(i <= m){
             v[i] = 2*i - 1;
             v[i+m] = 2*i ;

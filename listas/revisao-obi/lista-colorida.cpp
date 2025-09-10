@@ -10,12 +10,12 @@ const int MOD = 1e9 + 7;
 signed main() {
     ios::sync_with_stdio(0); cin.tie(0);
     int n; cin >> n; 
-    vector<int> v(n), zeros;
+    int<int> v(n), zeros;
     for(int i=0;i<n;i++){
         cin >> v[i];
         if(v[i] == 0) zeros.push_back(i);
     }
-    vector<int> ans1(n,LLONG_MAX), ans2(n,LLONG_MAX);
+    int<int> ans1(n,LLONG_MAX), ans2(n,LLONG_MAX);
     int contador = 0;
     for (int i = zeros[0];i<n;i++){
         if(v[i] == 0){

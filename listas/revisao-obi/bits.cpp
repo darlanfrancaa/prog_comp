@@ -23,7 +23,7 @@ signed main() {
         return 0; 
     }
 
-    vector<int> dp(n + 1, 0);
+    int<int> dp(n + 1, 0);
 
     for(int i = 0; i < k; i++){
         dp[i] = power(2, i);
