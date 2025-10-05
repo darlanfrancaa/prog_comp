@@ -1,8 +1,0 @@
-#include <bits/stdc++.h>
-using namespace std;
-#define int long long
-
-signed main(){
-    int a; cin >> a; 
-    cout << "voce tem" << a << "anos";
-}
