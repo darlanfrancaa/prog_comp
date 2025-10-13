@@ -28,7 +28,7 @@ signed main() {
             dp[1 << i] = max(dp[1 << i], duracao[i]);
         }
     }
-
+    
     for(int mask = 1; mask < M; mask++){
         if (dp[mask] == -1) continue;    
 
