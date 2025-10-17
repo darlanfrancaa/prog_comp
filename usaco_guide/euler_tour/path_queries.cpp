@@ -5,30 +5,24 @@ using namespace std;
 using pii = pair<int,int>;
 const int MOD = 1e9 + 7;
 
-struct Query{
-    int l, r, idx;
-};
-
-struct CompareQuery{
-    bool operator()(const Query &a, const Query &b){
-        return a.r < b.r;
-    }
-};
-
 template <typename T> struct SegTree{
     int n; 
     vector<T> tree;
+    vector<T> lazy;
     T NEUTRO = 0;
+    T NO_OP = 0;
 
     SegTree(const vector<T> &v){
         n = (int) v.size();
         tree.resize(4*n);
+        lazy.resize(4*n, NO_OP);
         build(v);
     }
 
     T merge(T &a, T &b){
         return a + b;
     }
+
 
     void build(int node, int ini, int fim, const vector<T> &v){
         if(ini == fim){
@@ -46,23 +40,40 @@ template <typename T> struct SegTree{
         build(1,0, n-1, v);
     }
 
-    void update(int node, int ini, int fim, int val, int pos){
-        if(ini == fim){
-            tree[node] = val;
+    void push(int node, int ini, int fim){
+        if(lazy[node] == NO_OP) return;
+        tree[node] += (fim-ini+1) * lazy[node];
+        if(ini != fim){
+            lazy[2*node] += lazy[node];
+            lazy[2*node + 1] += lazy[node];
+        }
+        lazy[node] = NO_OP;
+    }
+
+    void update(int node, int ini, int fim, int l, int r, T val){
+
+        push(node,ini,fim);
+
+        if(ini > r || fim < l) return ;
+
+        if(l <= ini && fim <= r){
+            lazy[node] += val;
             return;
         }
+
         int mid = (ini+fim)/2;
-        if(pos <= mid) update(2*node, ini, mid, val, pos);
-        else update(2*node+1, mid+1, fim, val, pos);
+        update(2 *node, ini, mid, l , r, val);
+        update(2 * node + 1, mid + 1, fim, l , r , val);
         tree[node] = merge(tree[2*node], tree[2*node+1]);
         return;
     }
 
-    void update(int val, int pos){
-        update(1, 0, n-1, val, pos);
+    void update(int l, int r, T val){
+        update(1, 0, n-1, l, r, val);
     }
 
     T query(int node, int ini, int fim, int l, int r){
+        push(node, ini, fim);
         if(l <= ini && fim <= r) return tree[node];
         if(ini > r || fim < l) return NEUTRO;
         int mid = (ini + fim)/2;
@@ -77,15 +88,19 @@ template <typename T> struct SegTree{
 };
 
 vector<vector<int>> adj; 
-vector<int> et, first, last, colors;
+vector<int> et, first, last, valores, sum;
 int timer = 0;
 
 void dfs(int p, int v){
     if(first[v] == -1) first[v] = timer;
     last[v] = timer;
     et[timer++] = v;
+    // printf("entrei no vertice %lld\n", v);
     for(auto &node: adj[v]){
+        // printf("estou visitando os filhos do vertice %lld\n", v);
         if(node != p){
+            sum[node] = sum[v] + valores[node];
+            // printf("eu estou visitando o filho %lld cujo valor da soma até ele é %lld\n", node, sum[node]);
             dfs(v, node);
             et[timer] = v; 
             last[v] = timer++;
@@ -95,45 +110,36 @@ void dfs(int p, int v){
 
 signed main() {
     ios::sync_with_stdio(0); cin.tie(0);
-    int n; cin >> n; 
-    et.resize(2*n -1); first.resize(n,-1); last.resize(n); adj.resize(n); colors.resize(n);
+    int n, q; cin >> n >> q; 
+    et.resize(2*n -1); first.resize(n,-1); last.resize(n); adj.resize(n); valores.resize(n); sum.resize(n);
     for(int i=0;i<n;i++){
-        cin >> colors[i];
+        cin >> valores[i];
     }
     for(int i=0;i<n-1;i++){
         int a, b; cin >> a >> b; 
         adj[--a].push_back(--b);
         adj[b].push_back(a);
     }
+    sum[0] = valores[0];
     dfs(-1,0);
-    vector<int> et_color (2 * n - 1);
-    for(int i=0;i<et_color.size(); i++){
-        et_color[i] = colors[et[i]];
+    vector<int> et_nums(2*n-1);
+    for(int i=0;i<et.size();i++){
+        et_nums[i] = sum[et[i]];
     }
-    vector<Query> queries; 
-    for(int i=0;i<n;i++){
-        queries.push_back({first[i], last[i], i});
-    }
-    sort(queries.begin(), queries.end(), CompareQuery());
-    vector<int> ans(n);
-    SegTree<int> seg(et_color);
-    map<int,int> last_pos; 
-    int qntd_query = 0;
-    for(int i=0;i<et_color.size();i++){
-        if(last_pos.count(et_color[i])){
-            seg.update(0,last_pos[et_color[i]]);
+    SegTree seg(et_nums);
+    for(int i=0;i<q;i++){
+        int op; cin >> op; 
+        if(op == 1){
+            int vtx, value; cin >> vtx >> value;
+            vtx--;
+            int delta = value - valores[vtx];
+            seg.update(first[vtx], last[vtx], delta);
+            valores[vtx] = value;;
+        } else { 
+            int vtx; cin >> vtx; 
+            vtx--;
+            cout << seg.query(first[vtx], first[vtx]) << "\n";
         }
-        seg.update(1,i);
-        last_pos[et_color[i]] = i;
-        while(qntd_query < n && queries[qntd_query].r == i){
-            auto [left, right, index] = queries[qntd_query];
-            ans[index] = seg.query(left, right);
-            qntd_query++;
-        }
-    }
-
-    for(int i=0;i<queries.size();i++){
-        cout << ans[i] << " ";
     }
     return 0;
 }
