@@ -79,7 +79,7 @@ signed main() {
     int i=0; 
     OrQueue q; 
     while(i < k) {
-        // cout << v[i] << " ";
+        // cout << v[i]  << " ";
         q.push(v[i++]); 
     }
     // cout << "\n";
