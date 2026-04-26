@@ -44,6 +44,7 @@ void scc(vector<vector<int>> const &adj, vector<vector<int>> &components, vector
 
     int n = adj.size(); 
     st.clear(); 
+    roots.assign(n, -1);
     timer = 0; 
     t_in.assign(n,-1); 
     t_low.assign(n,-1);
