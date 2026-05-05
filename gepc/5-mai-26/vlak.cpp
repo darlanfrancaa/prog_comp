@@ -39,7 +39,7 @@ int dfs(int v, int p){
         if(u != -1){
             bool valid = false; 
             if(p==1) valid = trie[u].has_nina;
-            else valid = trie[v].has_emi;
+            else valid = trie[u].has_emi;
             if(valid){
                 if(!dfs(u, 3-p)){
                     return true;
