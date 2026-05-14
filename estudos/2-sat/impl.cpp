@@ -59,7 +59,7 @@ struct TwoSat{
             int no_neg = 2*i + 1; 
 
             if(comp[no_pos] == comp[no_neg]) return false; 
-            ans[i] = comp[no_pos] > comp[no_neg];
+            ans[i] = (comp[no_pos] > comp[no_neg]);
         }
     }
 
