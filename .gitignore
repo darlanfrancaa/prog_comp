@@ -1,6 +1,8 @@
+
 .vscode/
 output/
 *.o
 *.out
 *.exe
+/bin/
 test

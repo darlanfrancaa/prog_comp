@@ -83,7 +83,7 @@ signed main() {
                 p0--;
             }
 
-            cout << op_jogada << " " << val_jogado << endl; // Joga e dá Flush
+            cout << op_jogada << " " << val_jogado << endl; // joga e da flush
         } else {
             char op;  int val; 
             cin >> op >> val; 
