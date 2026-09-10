@@ -50,5 +50,5 @@ signed main() {
     }
     dfs(0,0);
     for(int i=0;i<n;i++) cout << ans[i] << " ";
-    return 0;
+    return 0;   
 }
